@@ -1,0 +1,16 @@
+{
+    "name": "03.09promisse",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.0",
+        "fs-extra": "^8.1.0",
+        "puppeteer": "^1.19.0"
+    }
+}
