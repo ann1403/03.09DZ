@@ -7,19 +7,20 @@ const file = './text.txt';
     try {
         const browser = await puppeteer.launch({ headless: false });
         const page = await browser.newPage();
+        for (let i = 0; i < 5; i++) {
+            await page.goto('http://www.work.ua/jobs-kyiv-it/?advs=1');
 
-        await page.goto('http://www.work.ua/jobs-kyiv-it/?advs=1');
+            await page.waitForSelector('.container')
+            const conten = await page.$$('.container')
 
-        await page.waitForSelector('.container')
-        const conten = await page.$$('.container')
-        for (const con of conten) {
+            const con = conten[i];
             await page.waitForSelector('.card card-hover card-visited wordwrap job-link js-hot-block')
-            const divs = await page.$$('.card card-hover card-visited wordwrap job-link js-hot-block')
+            const divs = await con.$$('.card card-hover card-visited wordwrap job-link js-hot-block')
 
             for (const div of divs) {
                 // const names = await divs.$$('a');
                 await page.waitForSelector('.add-bottom-sm')
-                const h2s = await page.$$('.add-bottom-sm')
+                const h2s = await page.$$('.add-bottom-sm > h2')
                 for (const h2 of h2s) {
                     const name = await h2.$eval('a', (a) => { return a.innerText })
                     console.log('name', name)
